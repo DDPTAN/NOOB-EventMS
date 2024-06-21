@@ -1,0 +1,149 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "EV-.#####",
+ "creation": "2024-06-21 00:01:52.006259",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "event_title",
+  "organized_by",
+  "starts_on",
+  "ends_on",
+  "column_break_ydmk",
+  "address_line_1",
+  "city",
+  "province",
+  "location",
+  "column_break_obxh",
+  "price",
+  "number_of_tickets",
+  "status",
+  "section_break_vpuz",
+  "image",
+  "description"
+ ],
+ "fields": [
+  {
+   "fieldname": "event_title",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Event Title",
+   "reqd": 1
+  },
+  {
+   "fieldname": "organized_by",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Organized by",
+   "reqd": 1
+  },
+  {
+   "fieldname": "starts_on",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "Starts on",
+   "reqd": 1
+  },
+  {
+   "fieldname": "ends_on",
+   "fieldtype": "Datetime",
+   "label": "Ends on"
+  },
+  {
+   "fieldname": "location",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Location"
+  },
+  {
+   "fieldname": "column_break_obxh",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "price",
+   "fieldtype": "Currency",
+   "label": "Price",
+   "reqd": 1
+  },
+  {
+   "fieldname": "number_of_tickets",
+   "fieldtype": "Int",
+   "label": "Number of Tickets",
+   "reqd": 1
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Available\nSold Out",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_vpuz",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "image",
+   "fieldtype": "Attach Image",
+   "label": "Image",
+   "reqd": 1
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Text Editor",
+   "label": "Description",
+   "reqd": 1
+  },
+  {
+   "fieldname": "city",
+   "fieldtype": "Data",
+   "label": "City/Town",
+   "reqd": 1
+  },
+  {
+   "fieldname": "province",
+   "fieldtype": "Data",
+   "label": "State/Province",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_ydmk",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "address_line_1",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Address Line 1",
+   "reqd": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-06-21 01:46:56.977681",
+ "modified_by": "Administrator",
+ "module": "Event Management System",
+ "name": "Events",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}
