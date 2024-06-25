@@ -54,6 +54,7 @@
    "fieldname": "location",
    "fieldtype": "Data",
    "hidden": 1,
+   "in_list_view": 1,
    "label": "Location"
   },
   {
@@ -69,12 +70,14 @@
   {
    "fieldname": "number_of_tickets",
    "fieldtype": "Int",
+   "in_list_view": 1,
    "label": "Number of Tickets",
    "reqd": 1
   },
   {
    "fieldname": "status",
    "fieldtype": "Select",
+   "in_list_view": 1,
    "label": "Status",
    "options": "Available\nSold Out",
    "read_only": 1,
@@ -115,14 +118,13 @@
   {
    "fieldname": "address_line_1",
    "fieldtype": "Data",
-   "in_list_view": 1,
    "label": "Address Line 1",
    "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-06-21 01:46:56.977681",
+ "modified": "2024-06-25 01:05:51.714758",
  "modified_by": "Administrator",
  "module": "Event Management System",
  "name": "Events",
