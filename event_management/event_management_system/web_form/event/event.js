@@ -1,6 +1,11 @@
 frappe.ready(function () {
 	// Bind events to fields in Web Form using frappe.web_form.on
 
+	frappe.web_form.after_save = () => {
+		// Redirect to login page after saving the form
+		window.location.href = "/admin/event";
+	};
+
 	frappe.web_form.on("starts_on", (field, value) => {
 		// Ambil nilai tanggal starts_on
 		let starts_on = value;

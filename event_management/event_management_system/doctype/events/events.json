@@ -21,7 +21,8 @@
   "status",
   "section_break_vpuz",
   "image",
-  "description"
+  "description",
+  "published"
  ],
  "fields": [
   {
@@ -120,11 +121,18 @@
    "fieldtype": "Data",
    "label": "Address Line 1",
    "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "published",
+   "fieldtype": "Data",
+   "label": "Published"
   }
  ],
  "index_web_pages_for_search": 1,
+ "is_published_field": "published",
  "links": [],
- "modified": "2024-06-25 01:05:51.714758",
+ "modified": "2024-06-26 15:00:48.892071",
  "modified_by": "Administrator",
  "module": "Event Management System",
  "name": "Events",

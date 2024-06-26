@@ -7,7 +7,7 @@
  "allow_print": 0,
  "anonymous": 0,
  "apply_document_permissions": 0,
- "button_label": "Save",
+ "button_label": "Create Account",
  "condition_json": "[]",
  "creation": "2024-06-25 13:48:46.526024",
  "doc_type": "User",
@@ -19,7 +19,7 @@
  "list_columns": [],
  "login_required": 0,
  "max_attachment_size": 0,
- "modified": "2024-06-25 13:51:35.903583",
+ "modified": "2024-06-26 14:30:27.641637",
  "modified_by": "Administrator",
  "module": "Event Management System",
  "name": "register",
@@ -29,6 +29,7 @@
  "show_attachments": 0,
  "show_list": 0,
  "show_sidebar": 0,
+ "success_url": "",
  "title": "Register",
  "web_form_fields": [
   {
@@ -41,7 +42,7 @@
    "max_value": 0,
    "precision": "",
    "read_only": 0,
-   "reqd": 0,
+   "reqd": 1,
    "show_in_filter": 0
   },
   {
@@ -54,7 +55,7 @@
    "max_value": 0,
    "precision": "",
    "read_only": 0,
-   "reqd": 0,
+   "reqd": 1,
    "show_in_filter": 0
   },
   {
@@ -81,7 +82,7 @@
    "max_value": 0,
    "precision": "",
    "read_only": 0,
-   "reqd": 0,
+   "reqd": 1,
    "show_in_filter": 0
   },
   {
@@ -95,7 +96,7 @@
    "options": "Gender",
    "precision": "",
    "read_only": 0,
-   "reqd": 0,
+   "reqd": 1,
    "show_in_filter": 0
   },
   {
@@ -108,7 +109,7 @@
    "max_value": 0,
    "precision": "",
    "read_only": 0,
-   "reqd": 0,
+   "reqd": 1,
    "show_in_filter": 0
   },
   {
@@ -122,7 +123,7 @@
    "options": "Phone",
    "precision": "",
    "read_only": 0,
-   "reqd": 0,
+   "reqd": 1,
    "show_in_filter": 0
   },
   {
@@ -135,7 +136,7 @@
    "max_value": 0,
    "precision": "",
    "read_only": 0,
-   "reqd": 0,
+   "reqd": 1,
    "show_in_filter": 0
   }
  ]

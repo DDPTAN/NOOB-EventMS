@@ -1,0 +1,25 @@
+{
+ "cards": [
+  {
+   "card": "Available Event"
+  }
+ ],
+ "charts": [
+  {
+   "chart": "Order Chart",
+   "width": "Full"
+  }
+ ],
+ "creation": "2024-06-26 00:44:22.872726",
+ "dashboard_name": "Event Management Dashboard",
+ "docstatus": 0,
+ "doctype": "Dashboard",
+ "idx": 0,
+ "is_default": 1,
+ "is_standard": 1,
+ "modified": "2024-06-26 00:49:40.476596",
+ "modified_by": "Administrator",
+ "module": "Event Management System",
+ "name": "Event Management Dashboard",
+ "owner": "Administrator"
+}
