@@ -19,7 +19,7 @@
  "list_columns": [],
  "login_required": 0,
  "max_attachment_size": 0,
- "modified": "2024-06-25 14:19:56.325241",
+ "modified": "2024-06-25 23:42:10.098310",
  "modified_by": "Administrator",
  "module": "Event Management System",
  "name": "login",
@@ -46,8 +46,7 @@
   },
   {
    "allow_read_on_all_link_options": 0,
-   "depends_on": "enabled",
-   "fieldname": "section_break_3",
+   "fieldname": "user_details_tab",
    "fieldtype": "Password",
    "hidden": 0,
    "label": "Password",
