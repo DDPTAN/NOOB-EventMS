@@ -46,7 +46,7 @@ def generate_keys(user):
     return api_secret
 
 @frappe.whitelist(allow_guest=True)
-def getEvents():
+def get_events():
     try:
         events = frappe.get_all('Events', fields=[ 'name',
             'event_title', 'organized_by', 'starts_on', 'ends_on', 'address_line_1', 'city', 'province', 
@@ -115,9 +115,10 @@ def create_order(event_id, total_ticket):
         event_title = event.event_title
         available_tickets = event.number_of_tickets
         if total_ticket > available_tickets:
-                frappe.throw(_("Not enough tickets available for the event. Only {0} tickets remaining.")
-                             .format(available_tickets))
+            frappe.throw(_("Not enough tickets available for the event. Only {0} tickets remaining.")
+                         .format(available_tickets))
         event_price = event.price
+
         order = frappe.new_doc('Orders')
         order.user_id = frappe.session.user
         order.event_id = event_id
@@ -126,12 +127,14 @@ def create_order(event_id, total_ticket):
         order.total_price = total_ticket * event_price
         order.status = "Confirmed"
         order.insert()
+
+        event.reload()
         event.number_of_tickets -= total_ticket
-        event.save()
 
         frappe.response["message"] = {
             "success_key": 1,
             "message": "Order created successfully",
+            "data": order,
         }
     except Exception as e:
         frappe.response["message"] = {
@@ -143,12 +146,10 @@ def create_order(event_id, total_ticket):
 @frappe.whitelist()
 def get_orders_by_user():
     try:
-        email = frappe.session.user
-        print(f"User email fetched: {email}")
+        user = frappe.session.user
 
-        # Fetch orders for the logged-in user
-        orders = frappe.get_all('Orders', filters={'user_id': email}, fields=[
-            'user_id', 'event_id', 'event_title', 'total_ticket', 'total_price', 'status'
+        orders = frappe.get_all('Orders', filters={'user_id': user}, fields=[
+            'name', 'user_id', 'event_id', 'event_title', 'total_ticket', 'total_price', 'status'
         ])
 
         frappe.response["message"] = {
@@ -163,9 +164,23 @@ def get_orders_by_user():
         }
 
 @frappe.whitelist()
-def cancel_order(event_id):
+def cancel_order(order_id):
     try:
-        # Create cancel order logic here
+        order = frappe.get_doc('Orders', order_id)
+
+        if order.status == "Cancelled":
+            frappe.response["message"] = {
+                "success_key": 0,
+                "message": "Order has already been cancelled",
+            }
+            return
+
+        order.status = "Cancelled"
+        order.save()
+
+        event = frappe.get_doc('Events', order.event_id)
+        event.number_of_tickets += order.total_ticket
+        event.save()
 
         frappe.response["message"] = {
             "success_key": 1,

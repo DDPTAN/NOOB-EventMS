@@ -74,6 +74,7 @@ frappe.ready(function () {
 	frappe.web_form.after_load = () => {
 		// If the form is not new
 		if (!frappe.web_form.is_new) {
+			$(".edit-button.btn-default").hide();
 			// Check if status is not "Cancelled"
 			if (frappe.web_form.doc.status !== "Cancelled") {
 				const headerContainer = $(".web-form-header .title").first().parent();
@@ -87,7 +88,7 @@ frappe.ready(function () {
 							__("Are you sure you want to cancel this order?"),
 							function () {
 								frappe.call({
-									method: "event_management.event_management_system.doctype.orders.orders.return_event_tickets",
+									method: "event_management.event_management_system.web_form.order.order.return_event_tickets",
 									args: {
 										order_id: frappe.web_form.doc.name,
 									},
@@ -95,9 +96,10 @@ frappe.ready(function () {
 									freeze_message: __("Cancelling order..."),
 									callback: function (response) {
 										if (response.message === "success") {
-											// Update the status to "Cancelled" and save the form
-											frappe.web_form.set_value("status", "Cancelled");
-											frappe.web_form.save();
+											window.location.href = "/admin/order";
+											frappe.msgprint(
+												__("Order has been successfully cancelled.")
+											);
 										} else {
 											frappe.msgprint(__("Failed to cancel this order."));
 										}
