@@ -3,7 +3,7 @@ from frappe import auth
 from frappe import _
 
 @frappe.whitelist( allow_guest=True )
-def getUser(email, password):
+def login(email, password):
     try:
         login_manager = frappe.auth.LoginManager()
         login_manager.authenticate(user=email, pwd=password)
@@ -106,4 +106,73 @@ def get_event_by_id(id=None):
         frappe.response["message"] = {
             "success_key": 0,
             "message": f"An error occurred: {str(e)}"
+        }
+
+@frappe.whitelist()
+def create_order(event_id, total_ticket):
+    try:
+        event = frappe.get_doc('Events', event_id)
+        event_title = event.event_title
+        available_tickets = event.number_of_tickets
+        if total_ticket > available_tickets:
+                frappe.throw(_("Not enough tickets available for the event. Only {0} tickets remaining.")
+                             .format(available_tickets))
+        event_price = event.price
+        order = frappe.new_doc('Orders')
+        order.user_id = frappe.session.user
+        order.event_id = event_id
+        order.event_title = event_title
+        order.total_ticket = total_ticket
+        order.total_price = total_ticket * event_price
+        order.status = "Confirmed"
+        order.insert()
+        event.number_of_tickets -= total_ticket
+        event.save()
+
+        frappe.response["message"] = {
+            "success_key": 1,
+            "message": "Order created successfully",
+        }
+    except Exception as e:
+        frappe.response["message"] = {
+            "success_key": 0,
+            "message": f"Failed to create order: {str(e)}"
+        }
+
+
+@frappe.whitelist()
+def get_orders_by_user():
+    try:
+        email = frappe.session.user
+        print(f"User email fetched: {email}")
+
+        # Fetch orders for the logged-in user
+        orders = frappe.get_all('Orders', filters={'user_id': email}, fields=[
+            'user_id', 'event_id', 'event_title', 'total_ticket', 'total_price', 'status'
+        ])
+
+        frappe.response["message"] = {
+            "success_key": 1,
+            "message": "Orders fetched successfully",
+            "data": orders
+        }
+    except Exception as e:
+        frappe.response["message"] = {
+            "success_key": 0,
+            "message": f"An error occurred: {str(e)}"
+        }
+
+@frappe.whitelist()
+def cancel_order(event_id):
+    try:
+        # Create cancel order logic here
+
+        frappe.response["message"] = {
+            "success_key": 1,
+            "message": "Order cancelled successfully",
+        }
+    except Exception as e:
+        frappe.response["message"] = {
+            "success_key": 0,
+            "message": f"Failed to cancel order: {str(e)}"
         }
