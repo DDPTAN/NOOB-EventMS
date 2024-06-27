@@ -76,6 +76,7 @@ frappe.ready(function () {
 		if (!frappe.web_form.is_new) {
 			// Check if status is not "Cancelled"
 			if (frappe.web_form.doc.status !== "Cancelled") {
+				const headerContainer = $(".web-form-header .title").first().parent();
 				// Add a custom Cancel button with a confirmation dialog
 				$("<button/>", {
 					text: "Cancel", // Button text
@@ -86,7 +87,7 @@ frappe.ready(function () {
 							__("Are you sure you want to cancel this order?"),
 							function () {
 								frappe.call({
-									method: "return_event_tickets",
+									method: "event_management.event_management_system.doctype.orders.orders.return_event_tickets",
 									args: {
 										order_id: frappe.web_form.doc.name,
 									},
@@ -105,8 +106,19 @@ frappe.ready(function () {
 							}
 						);
 					},
-				}).appendTo(frappe.web_form.wrapper.find(".webform-actions"));
+				}).appendTo(headerContainer);
+
+				headerContainer.css({
+					display: "flex",
+					justifyContent: "space-between",
+					alignItems: "center",
+				});
 			}
 		}
 	};
+
+	// Manually trigger the after_load if necessary
+	if (typeof frappe.web_form.after_load === "function") {
+		frappe.web_form.after_load();
+	}
 });
