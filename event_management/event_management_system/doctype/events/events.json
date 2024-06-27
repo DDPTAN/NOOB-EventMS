@@ -19,6 +19,7 @@
   "price",
   "number_of_tickets",
   "status",
+  "route",
   "section_break_vpuz",
   "image",
   "description",

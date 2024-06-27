@@ -5,6 +5,8 @@ app_description = "EMS "
 app_email = "aufatan@tandigital.id"
 app_license = "mit"
 fixtures = ["Web Page"]
+
+
 # required_apps = []
 
 # Includes in <head>
