@@ -4,7 +4,7 @@ app_publisher = "Noob Team"
 app_description = "EMS "
 app_email = "aufatan@tandigital.id"
 app_license = "mit"
-fixtures = ["Web Page"]
+fixtures = ["Web Page", "Website Sidebar"]
 
 
 # required_apps = []
