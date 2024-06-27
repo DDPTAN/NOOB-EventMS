@@ -19,7 +19,7 @@
  "list_columns": [],
  "login_required": 1,
  "max_attachment_size": 0,
- "modified": "2024-06-26 00:39:27.130111",
+ "modified": "2024-06-27 12:06:16.274375",
  "modified_by": "Administrator",
  "module": "Event Management System",
  "name": "event",
@@ -28,7 +28,7 @@
  "route": "admin/event",
  "show_attachments": 0,
  "show_list": 1,
- "show_sidebar": 0,
+ "show_sidebar": 1,
  "title": "Event",
  "web_form_fields": [
   {
@@ -223,6 +223,21 @@
    "read_only": 0,
    "reqd": 1,
    "show_in_filter": 0
+  },
+  {
+   "allow_read_on_all_link_options": 0,
+   "default": "1",
+   "fieldname": "published",
+   "fieldtype": "Check",
+   "hidden": 1,
+   "label": "Published",
+   "max_length": 0,
+   "max_value": 0,
+   "precision": "",
+   "read_only": 0,
+   "reqd": 1,
+   "show_in_filter": 0
   }
- ]
+ ],
+ "website_sidebar": "Admin Sidebar"
 }

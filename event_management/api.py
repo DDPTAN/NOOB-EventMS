@@ -50,7 +50,7 @@ def getEvents():
     try:
         events = frappe.get_all('Events', fields=[ 'name',
             'event_title', 'organized_by', 'starts_on', 'ends_on', 'address_line_1', 'city', 'province', 
-            'location', 'price', 'number_of_tickets', 'status', 'image', 'description', 'route', 'published'
+            'location', 'price', 'number_of_tickets', 'status', 'image', 'description', 'published'
         ])
         
         frappe.response["message"] = {
