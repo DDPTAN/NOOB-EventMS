@@ -36,5 +36,37 @@ frappe.ui.form.on("Orders", {
 		if (!frm.doc.user_id) {
 			frm.set_value("user_id", frappe.session.user);
 		}
+
+		if(!frm.is_new()) {
+			frm.disable_save();
+			frm.set_df_property("event_id", "read_only", 1);
+			frm.set_df_property("total_ticket", "read_only", 1);
+
+			if (frm.doc.status !== "Cancelled") {
+				frm.add_custom_button(__("Cancel"), function () {
+					// Tampilkan konfirmasi sebelum menjalankan fungsi cancel
+					frappe.confirm(__("Are you sure you want to cancel this order?"), function () {
+						frm.call({
+							doc: frm.doc,
+							method: "return_event_tickets",
+							args: {
+								order_id: frm.doc.name,
+							},
+							freeze: true,
+							freeze_message: __("Cancelling order..."),
+							callback: function (response) {
+								if (response.message === "success") {
+									// Ubah status menjadi Cancelled setelah fungsi sukses
+									frm.set_value("status", "Cancelled");
+									frm.save();
+								} else {
+									frappe.msgprint(__("Failed to cancel this order."));
+								}
+							},
+						});
+					});
+				}).addClass("btn-danger");
+			}
+		}
 	},
 });

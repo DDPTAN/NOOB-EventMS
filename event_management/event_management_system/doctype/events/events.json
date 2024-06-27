@@ -123,16 +123,18 @@
    "reqd": 1
   },
   {
-   "default": "0",
+   "default": "1",
    "fieldname": "published",
-   "fieldtype": "Data",
-   "label": "Published"
+   "fieldtype": "Check",
+   "hidden": 1,
+   "label": "Published",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_published_field": "published",
  "links": [],
- "modified": "2024-06-26 15:00:48.892071",
+ "modified": "2024-06-26 18:03:37.221901",
  "modified_by": "Administrator",
  "module": "Event Management System",
  "name": "Events",
