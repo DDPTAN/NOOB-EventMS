@@ -7,7 +7,6 @@ app_license = "mit"
 fixtures = ["Web Page"]
 
 
-
 # required_apps = []
 
 # Includes in <head>
