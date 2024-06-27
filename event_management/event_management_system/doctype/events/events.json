@@ -19,6 +19,7 @@
   "price",
   "number_of_tickets",
   "status",
+  "route",
   "section_break_vpuz",
   "image",
   "description",
@@ -127,12 +128,17 @@
    "fieldname": "published",
    "fieldtype": "Data",
    "label": "Published"
+  },
+  {
+   "fieldname": "route",
+   "fieldtype": "Data",
+   "label": "Route"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_published_field": "published",
  "links": [],
- "modified": "2024-06-26 15:00:48.892071",
+ "modified": "2024-06-26 17:01:38.229825",
  "modified_by": "Administrator",
  "module": "Event Management System",
  "name": "Events",

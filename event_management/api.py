@@ -1,5 +1,6 @@
 import frappe
 from frappe import auth
+from frappe import _
 
 @frappe.whitelist( allow_guest=True )
 def getUser(email, password):
@@ -62,3 +63,30 @@ def getEvents():
             "success_key": 0,
             "message": f"An error occurred: {str(e)}"
         }
+
+
+@frappe.whitelist()
+def get_event_by_id(event_id):
+    if not event_id:
+        return {"success_key": 0, "message": _("Event ID is required")}
+    
+    try:
+        event = frappe.get_doc("Event", event_id)
+        event_data = {
+            "event_title": event.event_title,
+            "location": event.location,
+            "ends_on": event.ends_on,
+            "price": event.price,
+            "status": event.status,
+            "description": event.description,
+            "image": event.image,
+            "organized_by": event.organized_by,
+            "address_line1": event.address_line1,
+            "city": event.city,
+            "state": event.state,
+            "number_of_tickets": event.number_of_tickets,
+            "route": event.route
+        }
+        return {"success_key": 1, "data": event_data}
+    except frappe.DoesNotExistError:
+        return {"success_key": 0, "message": _("Event not found")}
