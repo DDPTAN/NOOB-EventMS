@@ -2,6 +2,31 @@
  {
   "docstatus": 0,
   "doctype": "Website Sidebar",
+  "modified": "2024-06-28 02:11:56.116986",
+  "name": "User Sidebar",
+  "sidebar_items": [
+   {
+    "group": null,
+    "parent": "User Sidebar",
+    "parentfield": "sidebar_items",
+    "parenttype": "Website Sidebar",
+    "route": "/dashboard",
+    "title": "Dashboard"
+   },
+   {
+    "group": null,
+    "parent": "User Sidebar",
+    "parentfield": "sidebar_items",
+    "parenttype": "Website Sidebar",
+    "route": "/my_order",
+    "title": "My Order"
+   }
+  ],
+  "title": "User Sidebar"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Website Sidebar",
   "modified": "2024-06-27 12:04:44.781601",
   "name": "Admin Sidebar",
   "sidebar_items": [
@@ -23,30 +48,5 @@
    }
   ],
   "title": "Admin Sidebar"
- },
- {
-  "docstatus": 0,
-  "doctype": "Website Sidebar",
-  "modified": "2024-06-27 16:23:41.220461",
-  "name": "User Sidebar",
-  "sidebar_items": [
-   {
-    "group": null,
-    "parent": "User Sidebar",
-    "parentfield": "sidebar_items",
-    "parenttype": "Website Sidebar",
-    "route": "/dashboard",
-    "title": "Dashboard"
-   },
-   {
-    "group": null,
-    "parent": "User Sidebar",
-    "parentfield": "sidebar_items",
-    "parenttype": "Website Sidebar",
-    "route": "/my-order",
-    "title": "My Order"
-   }
-  ],
-  "title": "User Sidebar"
  }
 ]
