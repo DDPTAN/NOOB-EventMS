@@ -1,44 +1,56 @@
 import frappe
+from frappe import auth
 from frappe import _
 
-@frappe.whitelist(allow_guest=True)
+@frappe.whitelist( allow_guest=True )
 def login(email, password):
     try:
         login_manager = frappe.auth.LoginManager()
         login_manager.authenticate(user=email, pwd=password)
         login_manager.post_login()
-
-        api_secret = generate_keys(frappe.session.user)
-        user = frappe.get_doc('User', frappe.session.user)
-
-        frappe.response["message"] = {
-            "success_key": 1,
-            "message": "Authentication success",
-            "sid": frappe.session.sid,
-            "api_key": user.api_key,
-            "api_secret": api_secret,
-            "username": user.username,
-            "email": user.email
-        }
     except frappe.exceptions.AuthenticationError:
         frappe.clear_messages()
-        frappe.response["message"] = {
-            "success_key": 0,
-            "message": "Authentication Error!"
+        frappe.local.response["message"] = {
+            "success_key":0,
+            "message":"Authentication Error!"
         }
-    except Exception as e:
-        frappe.response["message"] = {
-            "success_key": 0,
-            "message": f"An error occurred: {str(e)}"
-        }
+
+        return
+
+    api_generate = generate_keys(frappe.session.user)
+    user = frappe.get_doc('User', frappe.session.user)
+
+    frappe.response["message"] = {
+        "success_key":1,
+        "message":"Authentication success",
+        "sid":frappe.session.sid,
+        "api_key":user.api_key,
+        "api_secret":api_generate,
+        "username":user.username,
+        "email":user.email
+    }
+
+
+
+def generate_keys(user):
+    user_details = frappe.get_doc('User', user)
+    api_secret = frappe.generate_hash(length=15)
+
+    if not user_details.api_key:
+        api_key = frappe.generate_hash(length=15)
+        user_details.api_key = api_key
+
+    user_details.api_secret = api_secret
+    user_details.save()
+
+    return api_secret
 
 @frappe.whitelist(allow_guest=True)
 def get_events():
     try:
-        events = frappe.get_all('Events', fields=[
-            'name', 'event_title', 'organized_by', 'starts_on', 'ends_on', 
-            'address_line_1', 'city', 'province', 'location', 'price', 
-            'number_of_tickets', 'status', 'image', 'description', 'published'
+        events = frappe.get_all('Events', fields=[ 'name',
+            'event_title', 'organized_by', 'starts_on', 'ends_on', 'address_line_1', 'city', 'province', 
+            'location', 'price', 'number_of_tickets', 'status', 'image', 'description', 'published'
         ])
         
         frappe.response["message"] = {
@@ -52,9 +64,11 @@ def get_events():
             "message": f"An error occurred: {str(e)}"
         }
 
+
 @frappe.whitelist(allow_guest=True)
 def get_event_by_id(id=None):
     try:
+        # Retrieve the id parameter from the URL
         if not id:
             id = frappe.form_dict.id
 
@@ -100,8 +114,6 @@ def create_order(event_id, total_ticket):
         event = frappe.get_doc('Events', event_id)
         event_title = event.event_title
         available_tickets = event.number_of_tickets
-        event_price = event.price
-
         if total_ticket > available_tickets:
             frappe.local.response["http_status_code"] = 400
             frappe.throw(_("Not enough tickets available for the event. Only {0} tickets remaining.")
@@ -119,7 +131,6 @@ def create_order(event_id, total_ticket):
 
         event.reload()
         event.number_of_tickets -= total_ticket
-        event.save()
 
         frappe.response["message"] = {
             "success_key": 1,

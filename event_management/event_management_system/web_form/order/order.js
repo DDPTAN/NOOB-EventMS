@@ -1,8 +1,5 @@
 frappe.ready(function () {
 	// bind events here
-	if (frappe.session.user === "Guest") {
-		window.location.href = "/login";
-	}
 
 	frappe.web_form.after_save = () => {
 		// Redirect to login page after saving the form
