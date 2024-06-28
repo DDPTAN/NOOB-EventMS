@@ -116,6 +116,7 @@ def create_order(event_id, total_ticket):
         event_title = event.event_title
         available_tickets = event.number_of_tickets
         if total_ticket > available_tickets:
+            frappe.local.response["http_status_code"] = 400
             frappe.throw(_("Not enough tickets available for the event. Only {0} tickets remaining.")
                          .format(available_tickets))
             frappe.throw(_("Not enough tickets available for the event. Only {0} tickets remaining.")
