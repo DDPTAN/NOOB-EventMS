@@ -103,8 +103,10 @@ def create_order(event_id, total_ticket):
         event_price = event.price
 
         if total_ticket > available_tickets:
+            frappe.local.response["http_status_code"] = 400
             frappe.throw(_("Not enough tickets available for the event. Only {0} tickets remaining.")
                          .format(available_tickets))
+        event_price = event.price
 
         order = frappe.new_doc('Orders')
         order.user_id = frappe.session.user
@@ -122,13 +124,14 @@ def create_order(event_id, total_ticket):
         frappe.response["message"] = {
             "success_key": 1,
             "message": "Order created successfully",
-            "data": order.as_dict()
+            "data": order,
         }
     except Exception as e:
         frappe.response["message"] = {
             "success_key": 0,
             "message": f"Failed to create order: {str(e)}"
         }
+
 
 @frappe.whitelist()
 def get_orders_by_user():
