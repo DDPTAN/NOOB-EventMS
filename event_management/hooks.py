@@ -4,7 +4,7 @@ app_publisher = "Noob Team"
 app_description = "EMS "
 app_email = "aufatan@tandigital.id"
 app_license = "mit"
-fixtures = ["Web Page", "Website Sidebar", "Print Format"]
+fixtures = ["Web Page", "Website Sidebar", "Print Format", "Email Account", "Role"]
 doc_events = {
     "User": {
         "after_insert": "event_management.event_management_system.web_form.register.register.add_event_participant_role"
