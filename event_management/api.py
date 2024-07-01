@@ -175,14 +175,15 @@ def cancel_order(order_id):
                 "message": "Order has already been cancelled",
             }
             return
+        
+        if order.event_id and order.total_ticket:
+            event = frappe.get_doc('Events', order.event_id)
+            event.number_of_tickets += order.total_ticket
+            event.save()
 
-        order.status = "Cancelled"
-        order.save()
-
-        event = frappe.get_doc('Events', order.event_id)
-        event.number_of_tickets += order.total_ticket
-        event.save()
-
+            order.status = "Cancelled"
+            order.save()
+        
         frappe.response["message"] = {
             "success_key": 1,
             "message": "Order cancelled successfully",
